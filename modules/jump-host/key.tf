@@ -13,6 +13,6 @@ resource "local_file" "private_key_file" {
 
 
 resource "aws_key_pair" "tf_key" {
-  key_name   = "tf-key"
+  key_name   = "jump-host-key"
   public_key = tls_private_key.jump-host-key.public_key_openssh
 }

@@ -12,3 +12,10 @@ module "jump-host" {
   public-instances-subnets-ids = module.netowrk-settings.public-subnets-ids
 
 }
+
+module "eks-cluster" {
+  source                 = "./modules/eks"
+  eks-vpc-id             = module.netowrk-settings.vpc-id
+  eks-private-subnet-ids = module.netowrk-settings.private-subnets-ids
+
+}
