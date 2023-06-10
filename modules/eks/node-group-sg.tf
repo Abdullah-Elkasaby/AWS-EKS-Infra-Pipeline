@@ -1,5 +1,5 @@
-resource "aws_security_group" "eks_sg" {
-  name_prefix = "eks_sg"
+resource "aws_security_group" "eks-node-group-sg" {
+  name_prefix = "eks-node-group-sg"
   vpc_id      = var.eks-vpc-id
 
   ingress {
@@ -27,6 +27,6 @@ resource "aws_security_group" "eks_sg" {
   }
 
   tags = {
-    Name = "tf-eks-secuirty-group"
+    Name = "tf-eks-node-secuirty-group"
   }
 }

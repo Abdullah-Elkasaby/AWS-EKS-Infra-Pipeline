@@ -7,7 +7,7 @@ resource "tls_private_key" "jump-host-key" {
 
 resource "local_file" "private_key_file" {
   content         = tls_private_key.jump-host-key.private_key_pem
-  filename        = "key.pem"
+  filename        = "jump-host-key.pem"
   file_permission = "0600"
 }
 

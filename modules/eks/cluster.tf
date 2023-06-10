@@ -5,7 +5,10 @@ resource "aws_eks_cluster" "fastapi-cluster" {
   vpc_config {
     subnet_ids = var.eks-private-subnet-ids
 
-    security_group_ids      = [aws_security_group.eks_sg.id]
+
+    # TO-DO
+    # edit to only allow the jump-host
+    # security_group_ids      = [aws_security_group.eks-cluster-sg.id]
     endpoint_private_access = true
     endpoint_public_access  = false
   }
