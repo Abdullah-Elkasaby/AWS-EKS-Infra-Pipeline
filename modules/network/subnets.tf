@@ -6,6 +6,9 @@ resource "aws_subnet" "public-subnets" {
   cidr_block              = var.public-subnets-cidr-blocks[count.index]
   map_public_ip_on_launch = true
   availability_zone       = var.zones[count.index]
+  tags = {
+    Name = "Public-subnet"
+  }
 
 }
 
