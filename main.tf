@@ -22,11 +22,19 @@ module "eks-cluster" {
 }
 
 
-resource "local_file" "info" {
-  filename = "/ansbile/info.txt"
-  content  = <<-EOF
-        cluster_name=${module.eks-cluster.eks-cluster-name}
-        jump_host_ip=${module.jump-host.jump-host-public-ip}
-        jump_host_key_name=${module.jump-host.jump-host-key-name}
-      EOF
+# resource "local_file" "info" {
+#   filename = "ansible/cluster-info.txt"
+#   content  = <<-EOF
+#         cluster_name=${module.eks-cluster.eks-cluster-name}
+#         jump_host_ip=${module.jump-host.jump-host-public-ip}
+#         jump_host_key_name=${module.jump-host.jump-host-key-name}
+#       EOF
+# }
+
+resource "null_resource" "add-jump-host-ip-to-anisble-inventory" {
+  provisioner "local-exec" {
+    command     = "echo ${module.jump-host.jump-host-public-ip} >> inventory"
+    working_dir = "ansible/"
+  }
+
 }

@@ -1,0 +1,4 @@
+- name: ec2-configuration
+  hosts: jump_host
+  roles:
+    - jump-host-role
