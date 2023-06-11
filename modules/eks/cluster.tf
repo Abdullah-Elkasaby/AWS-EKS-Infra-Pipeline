@@ -8,7 +8,8 @@ resource "aws_eks_cluster" "fastapi-cluster" {
 
     # TO-DO
     # edit to only allow the jump-host
-    # security_group_ids      = [aws_security_group.eks-cluster-sg.id]
+    security_group_ids = [aws_security_group.eks-cluster-sg.id]
+
     endpoint_private_access = true
     endpoint_public_access  = false
   }

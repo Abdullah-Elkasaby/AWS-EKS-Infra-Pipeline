@@ -19,15 +19,15 @@ data "aws_ami" "ubuntu-ami" {
   owners = ["099720109477"] # Canonical official
 }
 
-resource "aws_instance" "public-instances" {
-  count = length(var.public-instances-subnets-ids)
+resource "aws_instance" "jump-host" {
 
   vpc_security_group_ids = var.instances-security-group-ids
-  subnet_id              = var.public-instances-subnets-ids[count.index]
+  subnet_id              = var.public-instances-subnets-ids[0]
 
   ami           = data.aws_ami.ubuntu-ami.id
   instance_type = "t2.micro"
   key_name      = aws_key_pair.tf_key.key_name
+  user_data     = var.jump-host-user-data
 
 }
 

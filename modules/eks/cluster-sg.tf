@@ -1,22 +1,12 @@
 resource "aws_security_group" "eks-cluster-sg" {
-  name_prefix = "eks_sg"
+  name_prefix = "eks_cluster_sg"
   vpc_id      = var.eks-vpc-id
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-
-  }
-
 
   ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-
+    cidr_blocks = ["${var.jump-host-private-ip-to-access-cluster}/32"]
   }
 
   egress {
@@ -27,6 +17,6 @@ resource "aws_security_group" "eks-cluster-sg" {
   }
 
   tags = {
-    Name = "tf-eks-secuirty-group"
+    Name = "tf-eks-cluster-secuirty-group"
   }
 }
