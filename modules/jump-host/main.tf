@@ -27,7 +27,7 @@ resource "aws_instance" "jump-host" {
   ami           = data.aws_ami.ubuntu-ami.id
   instance_type = "t2.micro"
   key_name      = aws_key_pair.tf_key.key_name
-  user_data     = var.jump-host-user-data
+  # user_data     = var.jump-host-user-data
 
 }
 
