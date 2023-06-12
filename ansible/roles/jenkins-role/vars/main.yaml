@@ -1,0 +1,8 @@
+
+jenkins_dir:
+  - {
+      path: "/home/ubuntu/jenkins-files",
+      type: "directory",
+    }
+
+

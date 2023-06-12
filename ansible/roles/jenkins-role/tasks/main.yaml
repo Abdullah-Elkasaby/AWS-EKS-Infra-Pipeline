@@ -1,0 +1,14 @@
+- name: create jenkins-files directory 
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: "{{ item.type }}"
+  loop: "{{ create_files }}"
+
+- name: copy jenkins deployment files to host
+  copy:
+    src: "{{ item }}"
+    dest: "/home/ubuntu/jenkins-files/"
+  with_fileglob:
+    - "{{ role_path }}/files/*"
+  tags: "deploy-jenkins"
+

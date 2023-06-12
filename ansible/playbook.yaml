@@ -2,3 +2,4 @@
   hosts: jump_host
   roles:
     - jump-host-role
+    - jenkins-role
