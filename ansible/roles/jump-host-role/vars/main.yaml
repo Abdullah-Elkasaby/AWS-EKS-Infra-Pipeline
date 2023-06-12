@@ -1,0 +1,63 @@
+packages:
+  - {package_name: "unzip", package_state: 'latest'}
+
+binaries: 
+  - {
+      binary_url: "https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl",
+      binary_dest: "/usr/local/bin"  
+    }
+  - {
+      binary_url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip",
+      binary_dest: "/tmp"
+    }
+  - {
+      binary_url: "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3",
+      binary_dest: "/tmp/get_helm.sh"
+    }
+
+files_mode:
+  - {
+      path: "/usr/local/bin/kubectl",
+      mode: "0755"
+    }
+  - {
+      path: ".aws/kubeconfig.sh",
+      mode: "0755"
+    }
+  - {
+      path: "/tmp/get_helm.sh",
+      mode: "0755"
+    }
+
+files_archive:
+  - {
+      src: "/tmp/awscli-exe-linux-x86_64.zip",
+      dest: "/tmp"
+    }
+
+script_files:
+  - {
+      script: "/tmp/aws/install"
+    }
+  - {
+      script: "/tmp/get_helm.sh"
+    }
+
+create_files:
+  - {
+      path: ".aws",
+      type: "directory",
+    }
+
+templates:
+  - {
+      src: "credentials.j2",
+      dest: ".aws/credentials"
+    }
+  - {
+      src: "kubeconfig.j2",
+      dest: ".aws/kubeconfig.sh"
+    }
+
+cluster_name: ""
+region: "us-east-1"
