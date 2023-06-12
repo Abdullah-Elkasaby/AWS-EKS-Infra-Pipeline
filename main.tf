@@ -43,8 +43,19 @@ resource "null_resource" "add-jump-host-ip-to-anisble-inventory" {
     working_dir = "ansible/"
   }
 
+  # always run the local provisioner to always have the inventory ready when changes are made
+  # it runs because the timestamp is different each time 
+  # so the triggers are triggered :'D
   triggers = {
     always_run = "${timestamp()}"
   }
 
 }
+
+
+data "aws_region" "current-region" {}
+
+
+
+
+

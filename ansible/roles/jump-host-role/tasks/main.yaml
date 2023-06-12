@@ -10,6 +10,18 @@
     dest: "{{ item.binary_dest }}"
   loop: "{{ binaries }}"
 
+- name: Create Files And Directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: "{{ item.type }}"
+  loop: "{{ create_files }}"
+
+- name: Copy Files
+  template:
+    src:  "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop: "{{ templates }}"
+  
 - name: Change Files Mode
   ansible.builtin.file:
     path: "{{ item.path }}"
@@ -28,18 +40,7 @@
   loop: "{{ script_files }}"
   ignore_errors: true
 
-- name: Create Files And Directories
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: "{{ item.type }}"
-  loop: "{{ create_files }}"
-
-- name: Copy Files
-  template:
-    src:  "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  loop: "{{ templates }}"
-
 - name: Update Kubeconfig
   ansible.builtin.shell: ".aws/kubeconfig.sh"
   become: false
+

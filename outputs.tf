@@ -11,3 +11,8 @@ output "jump-host-key" {
 output "eks-cluster-name" {
   value = module.eks-cluster.eks-cluster-name
 }
+
+
+output "current-region-name" {
+  value = data.aws_region.current-region.name
+}

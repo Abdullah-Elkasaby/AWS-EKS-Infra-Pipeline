@@ -2,4 +2,6 @@
 *.pem
 terraform.tfstate*
 *.terraform*
-.vscode
+.vscode/
+*vault*
+*.md
