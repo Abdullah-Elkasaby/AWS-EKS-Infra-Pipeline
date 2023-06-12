@@ -1,8 +1,16 @@
 
 jenkins_dir:
+  {
+    path: "/home/ubuntu/jenkins-files/",
+    type: "directory",
+  }
+
+
+templates:
   - {
-      path: "/home/ubuntu/jenkins-files",
-      type: "directory",
+      src: "master-volume.j2",
+      dest: "/home/ubuntu/jenkins-files/master-volume.yaml"
     }
+  
 
-
+cluster_nodes: ""

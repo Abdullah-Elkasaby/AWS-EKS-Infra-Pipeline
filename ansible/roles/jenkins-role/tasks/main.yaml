@@ -7,8 +7,39 @@
 - name: copy jenkins deployment files to host
   copy:
     src: "{{ item }}"
-    dest: "/home/ubuntu/jenkins-files/"
+    dest: "{{ jenkins_dir.path }}"
   with_fileglob:
     - "{{ role_path }}/files/*"
+  # tags: "deploy-jenkins"
+  become: false
+
+
+
+
+
+- name: get node-group ip
+  shell: kubectl get nodes -o yaml | grep -- 'kubernetes.io/hostname' | sed  's/.*://'
+  register: cluster_nodes
   tags: "deploy-jenkins"
+  become: false
+
+- debug: msg="{{ cluster_nodes.stdout }}"
+  tags: "deploy-jenkins"
+
+- name: reset the variable
+  ansible.builtin.set_fact:
+    cluster_nodes: ["{{ cluster_nodes.stdout }}"]
+  tags: "deploy-jenkins"
+
+# the jenkins-volume changes based on the cluster node 
+# so a template is used to copy it over 
+
+- name: copy jenkins-volume template over 
+  template:
+    src:  "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop: "{{ templates }}"
+  tags: "deploy-jenkins"
+
+
 

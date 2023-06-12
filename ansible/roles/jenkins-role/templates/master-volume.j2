@@ -29,7 +29,10 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - ip-10-0-1-83.us-east-2.compute.internal
+          {% for node in cluster_nodes %}
+            - {{ node }}
+          {% endfor %}
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
