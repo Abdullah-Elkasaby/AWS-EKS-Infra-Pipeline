@@ -10,7 +10,7 @@
     dest: "{{ jenkins_dir.path }}"
   with_fileglob:
     - "{{ role_path }}/files/*"
-  # tags: "deploy-jenkins"
+  tags: "deploy-jenkins"
   become: false
 
 

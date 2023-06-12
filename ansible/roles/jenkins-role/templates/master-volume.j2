@@ -1,7 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: local-storage
+  name: ebs-storage
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 ---
@@ -10,14 +10,14 @@ kind: PersistentVolume
 metadata:
   name: jenkins-pv-volume
   labels:
-    type: local
+    type: ebs
 spec:
-  storageClassName: gp2
+  storageClassName: ebs-storage
   claimRef:
     name: jenkins-pv-claim
     namespace: jenkins
   capacity:
-    storage: 10Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
   local:
@@ -40,7 +40,7 @@ metadata:
   name: jenkins-pv-claim
   namespace: jenkins
 spec:
-  storageClassName: gp2
+  storageClassName: ebs-storage
   accessModes:
     - ReadWriteOnce
   resources:

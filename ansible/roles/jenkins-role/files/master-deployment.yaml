@@ -14,20 +14,19 @@ spec:
         app: jenkins-server
     spec:
       securityContext:
-            # fsGroup: 1000
-            runAsUser: 0
-
+            fsGroup: 1000
+            runAsUser: 1000
       serviceAccountName: jenkins-admin
       containers:
         - name: jenkins
-          securityContext:
-            # fsGroup: 1000
-            runAsUser: 0
-          image: jenkins/jenkins:lts-jdk11
+          image: jenkins/jenkins:lts
           resources:
             limits:
               memory: "2Gi"
               cpu: "1000m"
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
           ports:
             - name: httpport
               containerPort: 8080
@@ -52,15 +51,7 @@ spec:
           volumeMounts:
             - name: jenkins-data
               mountPath: /var/jenkins_home
-
-            - mountPath: /var/run/docker.sock
-              name: docker-sock
       volumes:
-        - name: docker-sock
-          hostPath:
-            path: /var/run/docker.sock
         - name: jenkins-data
           persistentVolumeClaim:
               claimName: jenkins-pv-claim
-                                                                                                                                                           52,15         Bot
-
