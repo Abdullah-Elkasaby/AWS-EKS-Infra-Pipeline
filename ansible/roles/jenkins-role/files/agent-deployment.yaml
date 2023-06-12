@@ -18,6 +18,10 @@ spec:
       containers:
       - name: jenkins-agent
         image: abdullahelkasaby/jenkins-agent:v1
+        resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
         ports:
         - containerPort: 22
         volumeMounts:

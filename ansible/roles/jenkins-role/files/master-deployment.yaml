@@ -24,13 +24,10 @@ spec:
             # fsGroup: 1000
             runAsUser: 0
           image: jenkins/jenkins:lts-jdk11
-          # resources:
-          #   limits:
-          #     memory: "4Gi"
-          #     cpu: "2000m"
-          #   requests:
-          #     memory: "1Gi"
-          #     cpu: "1000m"
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
           ports:
             - name: httpport
               containerPort: 8080

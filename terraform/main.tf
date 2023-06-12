@@ -35,12 +35,12 @@ resource "null_resource" "add-jump-host-ip-to-anisble-inventory" {
 
   provisioner "local-exec" {
     command     = "sed -i '2d' inventory"
-    working_dir = "ansible/"
+    working_dir = "../ansible/"
   }
 
   provisioner "local-exec" {
     command     = "echo ${module.jump-host.jump-host-public-ip} >> inventory"
-    working_dir = "ansible/"
+    working_dir = "../ansible/"
   }
 
   # always run the local provisioner to always have the inventory ready when changes are made
