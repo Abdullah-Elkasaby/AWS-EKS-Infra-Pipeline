@@ -43,3 +43,32 @@
 
 
 
+# => Deploy Jenkins On The Cluster
+# _______________________________________________________ #
+
+
+# it's important to create the namespace, volume, and service account first
+# for the the deployment to work 
+- name: Create jenkins namespace
+  become: false
+  tags: "deploy-jenkins"
+  shell: kubectl apply -f /home/ubuntu/jenkins-files/namespace.yaml
+  
+
+- name: Create jenkins master volume
+  become: false
+  tags: "deploy-jenkins"
+  shell: kubectl apply -f /home/ubuntu/jenkins-files/master-volume.yaml
+  
+
+- name: Create jenkins master service account
+  become: false
+  tags: "deploy-jenkins"
+  shell: kubectl apply -f /home/ubuntu/jenkins-files/master-serviceAccount.yaml
+
+
+- name: create the master and the agent deployment
+  become: false
+  tags: "deploy-jenkins"
+  shell: kubectl apply -f /home/ubuntu/jenkins-files
+
