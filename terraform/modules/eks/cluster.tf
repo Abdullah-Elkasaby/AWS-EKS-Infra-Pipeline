@@ -2,6 +2,9 @@ resource "aws_eks_cluster" "fastapi-cluster" {
   name     = "tf-fastapi-cluster"
   role_arn = aws_iam_role.eks-role.arn
 
+
+  version = "1.23"
+
   vpc_config {
     subnet_ids = var.eks-private-subnet-ids
 

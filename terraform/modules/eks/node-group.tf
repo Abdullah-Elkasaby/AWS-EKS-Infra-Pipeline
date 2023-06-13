@@ -6,10 +6,13 @@ resource "aws_eks_node_group" "eks-node-group" {
   instance_types  = ["t2.medium"]
 
   scaling_config {
-    desired_size = 1
-    max_size     = 2
     min_size     = 1
+    desired_size = 2
+    max_size     = 3
   }
+
+  # changed version because of docker-run-time
+  version = "1.23"
 
   update_config {
     max_unavailable = 1
