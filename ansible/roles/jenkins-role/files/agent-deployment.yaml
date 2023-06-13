@@ -4,7 +4,6 @@ metadata:
   name: jenkins-agent
   namespace: jenkins
 spec:
-  
   replicas: 1
   selector:
     matchLabels:
@@ -14,14 +13,9 @@ spec:
       labels:
         app: jenkins-agent
     spec:
-      serviceAccountName: jenkins-admin
       containers:
       - name: jenkins-agent
         image: abdullahelkasaby/jenkins-agent:v1
-        resources:
-            limits:
-              memory: "2Gi"
-              cpu: "1000m"
         ports:
         - containerPort: 22
         volumeMounts:
@@ -31,3 +25,6 @@ spec:
         - name: docker-sock
           hostPath:
             path: /var/run/docker.sock
+      
+
+
