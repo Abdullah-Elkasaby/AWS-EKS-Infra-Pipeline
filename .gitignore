@@ -4,4 +4,4 @@ terraform.tfstate*
 *.terraform*
 .vscode/
 *vault*
-*.md
+kubeconfig
