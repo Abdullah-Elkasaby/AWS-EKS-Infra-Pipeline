@@ -3,10 +3,12 @@ resource "aws_security_group" "eks-cluster-sg" {
   vpc_id      = var.eks-vpc-id
 
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["${var.jump-host-private-ip-to-access-cluster}/32"]
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    # cidr_blocks = ["${var.jump-host-private-ip-to-access-cluster}/32"]
+    cidr_blocks = ["0.0.0.0/0"]
+
   }
 
   egress {

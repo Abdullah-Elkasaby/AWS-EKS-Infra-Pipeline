@@ -8,7 +8,7 @@ variable "eks-vpc-id" {
 }
 
 
-variable "jump-host-private-ip-to-access-cluster" {
+# variable "jump-host-private-ip-to-access-cluster" {
 
-}
+# }
 

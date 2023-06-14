@@ -14,10 +14,10 @@ module "jump-host" {
 }
 
 module "eks-cluster" {
-  source                                 = "./modules/eks"
-  eks-vpc-id                             = module.netowrk-settings.vpc-id
-  eks-private-subnet-ids                 = module.netowrk-settings.private-subnets-ids
-  jump-host-private-ip-to-access-cluster = module.jump-host.jump-host-private-ip
+  source                 = "./modules/eks"
+  eks-vpc-id             = module.netowrk-settings.vpc-id
+  eks-private-subnet-ids = module.netowrk-settings.private-subnets-ids
+  # jump-host-private-ip-to-access-cluster = module.jump-host.jump-host-private-ip
 
 }
 
