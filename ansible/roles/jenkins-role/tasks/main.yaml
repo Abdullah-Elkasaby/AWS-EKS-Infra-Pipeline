@@ -23,7 +23,7 @@
 
 - name: reset the variable
   ansible.builtin.set_fact:
-    cluster_nodes: ["{{ cluster_nodes.stdout }}"]
+    cluster_nodes: "{{ cluster_nodes.stdout }}"
   tags: "deploy-jenkins"
 
 # the jenkins-volume changes based on the cluster node 
@@ -66,4 +66,3 @@
   become: false
   tags: "deploy-jenkins"
   shell: kubectl apply -f /home/ubuntu/jenkins-files
-
