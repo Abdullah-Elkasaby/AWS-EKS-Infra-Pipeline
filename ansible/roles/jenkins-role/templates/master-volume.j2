@@ -29,7 +29,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          {% for node in cluster_nodes %}
+          {% for node in cluster_nodes.split('\n') %}
             - {{ node }}
           {% endfor %}
 

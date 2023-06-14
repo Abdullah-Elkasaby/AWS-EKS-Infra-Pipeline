@@ -13,9 +13,10 @@ spec:
       labels:
         app: jenkins-agent
     spec:
+      serviceAccountName: jenkins-admin
       containers:
       - name: jenkins-agent
-        image: abdullahelkasaby/jenkins-agent:v1
+        image: abdullahelkasaby/jenkins-agent:v5
         ports:
         - containerPort: 22
         volumeMounts:
