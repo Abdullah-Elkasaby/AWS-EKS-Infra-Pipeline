@@ -55,18 +55,21 @@ Before setting up the CI/CD pipeline, ensure that you have the following prerequ
 3. The jump-host-role must have a file in the vars directory named `vault.yaml` which shoud contain your credinitals to AWS encrypted using `ansible-vault encrypt`
 4. Run the Ansible playbook using the `ansible-playbook` command to automate the jump host configuration.
 ![ansible-output](screenshots/ansible-output.png)
+
+
+
 ## Step 3: Jenkins Master and Agent Deployment
 
-1. Install and configure Jenkins on the jump host using Ansible or manually.
-2. Install the necessary plugins in Jenkins to support Kubernetes and Helm deployments.
-3. Configure the Jenkins master and agent using the Jenkins UI or by creating Jenkinsfiles.
+1. Ansible automates the deployment process of jenkins, all you have to do is configure it.
+2. Access the URL from ansible output on port 8080 using the password printed below the url.
+3. Create a user using the retrieved password.
+3. Configure the Jenkins master and agent using the Jenkins UI.
 4. Create a Jenkins pipeline job that pulls the source code for the FastAPI application and performs the necessary build steps.
 
-## Step 4: Deploying FastAPI Endpoint with Jenkins
+![jenkins-url](screenshots/ansible_jenkins_url.png)
 
-1. Create a user using the password retrieved from the Pod logs
-2. Configure Jenkins to use the agent as a node.
-3. Create a Jenkins pipeline job that deploys the Helm chart to the EKS cluster using the GitHub Repo.
+## Step 4: Deploying FastAPI Endpoint with Jenkins
+1. Run the Jenkins pipeline job that deploys the Helm chart to the EKS cluster using the GitHub Repo.
 
 
 
