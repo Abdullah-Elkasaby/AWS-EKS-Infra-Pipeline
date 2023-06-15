@@ -76,3 +76,18 @@
 
 - debug: msg=" Jenkins URL is {{ jenkins_url.stdout }}"
   tags: "get-info"
+
+
+- name: Get Jenkins' master password
+  become: false
+  tags: "get-info"
+  shell: kubectl -n jenkins exec -it  deployment/jenkins -- cat /var/jenkins_home/secrets/initialAdminPassword
+  register: jenkins_password
+
+
+- debug: msg=" Jenkins password is  {{ jenkins_url.stdout }}"
+  tags: "get-info"
+
+
+  
+
