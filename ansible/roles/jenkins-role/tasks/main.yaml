@@ -5,7 +5,7 @@
     dest: "{{ jenkins_dir.path }}"
   with_fileglob:
     - "{{ role_path }}/files/*"
-  tags: "deploy-jenkins"
+  tags: "copy-jenkins-files"
   become: false
 
 
@@ -15,16 +15,16 @@
 - name: get node-group ip
   shell: kubectl get nodes -o yaml | grep -- 'kubernetes.io/hostname' | sed  's/.*://'
   register: cluster_nodes
-  tags: "deploy-jenkins"
+  tags: "get-info"
   become: false
 
-- debug: msg="{{ cluster_nodes.stdout }}"
-  tags: "deploy-jenkins"
+- debug: msg="Nodes endpoints are {{ cluster_nodes.stdout }}"
+  tags: "get-info"
 
 - name: reset the variable
   ansible.builtin.set_fact:
     cluster_nodes: "{{ cluster_nodes.stdout }}"
-  tags: "deploy-jenkins"
+  tags: "get-info"
 
 # the jenkins-volume changes based on the cluster node 
 # so a template is used to copy it over 
@@ -34,7 +34,7 @@
     src:  "{{ item.src }}"
     dest: "{{ item.dest }}"
   loop: "{{ templates }}"
-  tags: "deploy-jenkins"
+  tags: "copy-jenkins-files"
 
 
 
@@ -66,3 +66,13 @@
   become: false
   tags: "deploy-jenkins"
   shell: kubectl apply -f /home/ubuntu/jenkins-files
+
+- name: Get Jenkins' master URL
+  become: false
+  tags: "get-info"
+  shell: kubectl -n jenkins describe svc jenkins-master | grep --  'LoadBalancer Ingress' | sed 's/.*://'
+  register: jenkins_url
+
+
+- debug: msg=" Jenkins URL is {{ jenkins_url.stdout }}"
+  tags: "get-info"
