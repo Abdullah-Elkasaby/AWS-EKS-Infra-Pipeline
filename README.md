@@ -3,6 +3,9 @@
 
 The objective of this project is to establish a CI/CD pipeline for deploying an Instance Segmentation Model application. The pipeline incorporates various technologies such as Terraform for infrastructure provisioning, Ansible for configuration management, and Jenkins for continuous integration and deployment (CI/CD). The application's source code can be found at [this GitHub repository](https://github.com/Abdullah-Elkasaby/Automated-Instance-Segmentation-model-API-Deployment-with-CI-CD/tree/beta).
 
+# Project Diagram
+![structure](screenshots/diagram.png)
+
 
 # Components 
  
